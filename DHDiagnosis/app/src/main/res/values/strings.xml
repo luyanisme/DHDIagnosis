@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">DHDiagnosis</string>
+    <string name="title_activity_guide">GuideActivity</string>
+    <string name="title_activity_detect">DetectActivity</string>
+    <string name="title_activity_base">BaseActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_locate_device">LocateDeviceActivity</string>
+    <string name="title_activity_device_list">DeviceListActivity</string>
+    <string name="title_activity_diagnosis">DiagnosisActivity</string>
+</resources>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="50dp"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.luyan.dhdiagnosis.UI.Activity.DiagnosisActivity"
+    tools:showIn="@layout/activity_diagnosis">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/device_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/device_text_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设备运行"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="50dp"
+            android:textSize="18dp"
+            android:layout_alignParentRight="true"/>
+
+        <ImageView
+            android:id="@+id/device_state"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#a4a4a4"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#a3a3a3"
+        android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="轴承垂直方向:"
+            android:textSize="18dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上次测量数据:6.2"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本次测量数据:6.2"
+                android:textSize="15dp"
+                android:layout_alignParentBottom="true"/>
+
+            <Button
+                android:id="@+id/start_detect"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:text="测量"
+                android:background="@drawable/button_border_style"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#a3a3a3"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        
+        <ImageView
+            android:layout_width="230dp"
+            android:layout_height="150dp"
+            android:background="#a4a4a4"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:layout_marginRight="0dp"
+            android:layout_alignParentRight="true">
+
+            <Button
+                android:id="@+id/pre_station"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="上个测点"
+                android:background="@drawable/button_border_style"/>
+
+            <Button
+                android:id="@+id/next_station"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="下个测点"
+                android:background="@drawable/button_border_style"/>
+
+            <Button
+                android:id="@+id/station_record"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="测点记录"
+                android:background="@drawable/button_border_style"/>
+
+            <Button
+                android:id="@+id/remove_record"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="删除本次数据"
+                android:background="@drawable/button_border_style"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
