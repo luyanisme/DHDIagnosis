@@ -3,6 +3,7 @@ package com.example.luyan.dhdiagnosis.UI.Fragment;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.luyan.dhdiagnosis.R;
 import com.github.mikephil.charting.animation.Easing;
@@ -37,6 +39,9 @@ public class ChartFragment extends Fragment implements OnChartGestureListener, O
 
     private LineChart mChart;
     private Context mcontext;
+    private TextView firstData;
+    private TextView secondData;
+
 
     public ChartFragment(Context context) {
         // Required empty public constructor
@@ -49,8 +54,13 @@ public class ChartFragment extends Fragment implements OnChartGestureListener, O
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
-        view.setX(10);
-        view.setY(760);
+        firstData = (TextView) view.findViewById(R.id.first_data);
+        secondData = (TextView) view.findViewById(R.id.second_data);
+
+        /*添加下划线*/
+        firstData.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        secondData.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+
         mChart = (LineChart) view.findViewById(R.id.chart1);
         mChart.setOnChartGestureListener(this);
         mChart.setOnChartValueSelectedListener(this);

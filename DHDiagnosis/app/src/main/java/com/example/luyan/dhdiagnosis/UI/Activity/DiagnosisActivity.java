@@ -2,9 +2,13 @@ package com.example.luyan.dhdiagnosis.UI.Activity;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,16 +18,20 @@ import android.widget.TextView;
 import com.example.luyan.dhdiagnosis.MetaData.DeviceItem;
 import com.example.luyan.dhdiagnosis.R;
 import com.example.luyan.dhdiagnosis.UI.Fragment.ChartFragment;
+import com.example.luyan.dhdiagnosis.UI.Fragment.DiagnosisFragment;
 import com.example.luyan.dhdiagnosis.UI.Fragment.NaviFragment;
 
-public class DiagnosisActivity extends BaseActivity implements NaviFragment.AmendNaviDelegate, View.OnClickListener {
+import java.util.ArrayList;
 
-    private TextView deviceName;
-    private TextView deviceTextState;
-    private ImageView deviceState;
-    private Boolean isRunning = false;//检测设备是否正在被检测
+import fr.castorflex.android.verticalviewpager.VerticalViewPager;
+
+public class DiagnosisActivity extends BaseActivity implements NaviFragment.AmendNaviDelegate {
+
+    private boolean isRunning;
 
     private static final String TAG = "DiagnosisActivity";
+
+    private  DiagnosisFragment diagnosisFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,56 +39,30 @@ public class DiagnosisActivity extends BaseActivity implements NaviFragment.Amen
         setContentView(R.layout.activity_diagnosis);
 
         DeviceItem deviceItem = getIntent().getParcelableExtra(DeviceListActivity.EXTRA_DEVICE_MESSAGE);
-        deviceName = (TextView) findViewById(R.id.device_name);
-        deviceState = (ImageView) findViewById(R.id.device_state);
-        deviceTextState = (TextView) findViewById(R.id.device_text_state);
-
-        /*添加Button事件*/
-        findViewById(R.id.start_detect).setOnClickListener(this);//开始测量
-        findViewById(R.id.pre_station).setOnClickListener(this);//上一个测点
-        findViewById(R.id.next_station).setOnClickListener(this);//下一个测点
-        findViewById(R.id.station_record).setOnClickListener(this);//测点记录
-        findViewById(R.id.remove_record).setOnClickListener(this);//删除本次测点
-
-        /*初始化设备状态*/
-        deviceName.setText(deviceItem.getDeviceName());
-        deviceTextState.setText(deviceItem.getDeviceRunning() == 0 ? "设备运行" : "设备停止");
-        deviceState.setBackgroundColor(deviceItem.getDeviceRunning() == 0 ? Color.rgb(0, 255, 0) : Color.rgb(255, 0, 0));
 
         if (savedInstanceState == null) {
             super.initNavi(R.id.diagnosis_container, getIntent().getStringExtra(DeviceListActivity.EXTRA_TITLE_MESSAGE));
         }
 
-        initChartFragment();
-    }
 
-    public void initChartFragment() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ChartFragment chartFragment = new ChartFragment(this);
-        fragmentTransaction.add(R.id.diagnosis_container, chartFragment);
-        fragmentTransaction.commit();
-    }
+        diagnosisFragment = new DiagnosisFragment(getSupportFragmentManager(),this,deviceItem);
+        VerticalViewPager verticalViewPager = (VerticalViewPager) findViewById(R.id.verticalviewpager);
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.start_detect:
-                isRunning = true;
-                break;
+        verticalViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public int getCount() {
+                return 2;
+            }
 
-            case R.id.pre_station:
-                break;
+            @Override
+            public Fragment getItem(int position) {
+                ArrayList<Fragment> list = new ArrayList<Fragment>();
+                list.add(diagnosisFragment);
 
-            case R.id.next_station:
-                break;
-
-            case R.id.station_record:
-                break;
-
-            case R.id.remove_record:
-                break;
-        }
+                list.add(new Fragment());
+                return list.get(position);
+            }
+        });
     }
 
     @Override
