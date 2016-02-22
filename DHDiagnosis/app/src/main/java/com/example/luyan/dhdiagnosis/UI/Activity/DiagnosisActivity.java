@@ -17,21 +17,24 @@ import android.widget.TextView;
 
 import com.example.luyan.dhdiagnosis.MetaData.DeviceItem;
 import com.example.luyan.dhdiagnosis.R;
+import com.example.luyan.dhdiagnosis.UI.Fragment.ChartContainerFragment;
 import com.example.luyan.dhdiagnosis.UI.Fragment.ChartFragment;
 import com.example.luyan.dhdiagnosis.UI.Fragment.DiagnosisFragment;
 import com.example.luyan.dhdiagnosis.UI.Fragment.NaviFragment;
+import com.example.luyan.dhdiagnosis.utils.IntentUtils;
 
 import java.util.ArrayList;
 
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
-public class DiagnosisActivity extends BaseActivity implements NaviFragment.AmendNaviDelegate {
+public class DiagnosisActivity extends BaseActivity implements NaviFragment.AmendNaviDelegate, DiagnosisFragment.DiagnosisDelegate {
 
     private boolean isRunning;
 
     private static final String TAG = "DiagnosisActivity";
 
-    private  DiagnosisFragment diagnosisFragment;
+    private DiagnosisFragment diagnosisFragment;
+    private ChartContainerFragment chartContainerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +44,15 @@ public class DiagnosisActivity extends BaseActivity implements NaviFragment.Amen
         DeviceItem deviceItem = getIntent().getParcelableExtra(DeviceListActivity.EXTRA_DEVICE_MESSAGE);
 
         if (savedInstanceState == null) {
-            super.initNavi(R.id.diagnosis_container, getIntent().getStringExtra(DeviceListActivity.EXTRA_TITLE_MESSAGE));
+            super.initNavi(R.id.diagnosis_container, getIntent().getStringExtra(DeviceListActivity.EXTRA_TITLE_MESSAGE),null);
         }
 
 
         diagnosisFragment = new DiagnosisFragment(getSupportFragmentManager(),this,deviceItem);
-        VerticalViewPager verticalViewPager = (VerticalViewPager) findViewById(R.id.verticalviewpager);
+        diagnosisFragment.setDelegate(this);
+        chartContainerFragment = new ChartContainerFragment(getSupportFragmentManager(),this);
 
+        VerticalViewPager verticalViewPager = (VerticalViewPager) findViewById(R.id.verticalviewpager);
         verticalViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public int getCount() {
@@ -58,8 +63,7 @@ public class DiagnosisActivity extends BaseActivity implements NaviFragment.Amen
             public Fragment getItem(int position) {
                 ArrayList<Fragment> list = new ArrayList<Fragment>();
                 list.add(diagnosisFragment);
-
-                list.add(new Fragment());
+                list.add(chartContainerFragment);
                 return list.get(position);
             }
         });
@@ -89,5 +93,49 @@ public class DiagnosisActivity extends BaseActivity implements NaviFragment.Amen
 
                     }
                 }).show();
+    }
+
+    /*开始测试*/
+    @Override
+    public void startDetect() {
+
+    }
+
+    /*上个测点*/
+    @Override
+    public void preStation() {
+
+    }
+
+    /*下个测点*/
+    @Override
+    public void nextStation() {
+
+    }
+
+    /*测点记录*/
+    @Override
+    public void stationRecord() {
+        IntentUtils.startToActivity(DiagnosisActivity.this,StationRecordActivity.class);
+        /*动画效果*/
+        overridePendingTransition(R.anim.move_right_in_activity,R.anim.move_left_out_activity);
+    }
+
+    /*删除测点*/
+    @Override
+    public void removeRecord() {
+
+    }
+
+    /*扫描二维码*/
+    @Override
+    public void scanQR() {
+
+    }
+
+    /*扫描RFID*/
+    @Override
+    public void scanRFID() {
+
     }
 }

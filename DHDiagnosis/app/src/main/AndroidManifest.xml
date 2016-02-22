@@ -3,6 +3,7 @@
     package="com.example.luyan.dhdiagnosis">
 
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -39,6 +40,10 @@
         <activity
             android:name=".UI.Activity.BaseActivity"
             android:label="@string/title_activity_base"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UI.Activity.StationRecordActivity"
+            android:label="@string/title_activity_station_record"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

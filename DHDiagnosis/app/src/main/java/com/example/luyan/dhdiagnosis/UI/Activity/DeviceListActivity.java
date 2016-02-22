@@ -63,7 +63,7 @@ public class DeviceListActivity extends BaseActivity implements NaviFragment.Ame
         naviTitle = getIntent().getStringExtra(IntentUtils.INTENT_STRING_PARAM);
 
         if (savedInstanceState == null){
-            super.initNavi(R.id.device_list_container,naviTitle);
+            super.initNavi(R.id.device_list_container,naviTitle,null);
         }
 
         initList();

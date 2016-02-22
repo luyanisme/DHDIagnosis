@@ -17,4 +17,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="edittext_style">
+        <item name="android:background">@drawable/edit_text_style</item>
+        <item name="android:paddingLeft">5dip</item>
+    </style>
 </resources>

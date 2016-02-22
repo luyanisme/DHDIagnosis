@@ -31,6 +31,8 @@ public class DiagnosisFragment extends Fragment implements View.OnClickListener 
     private Context mcontext;
     private DeviceItem deviceItem;
 
+    private DiagnosisDelegate delegate;
+
     public DiagnosisFragment(FragmentManager fm, Context context, DeviceItem deviceItem) {
         // Required empty public constructor
         this.fm = fm;
@@ -41,7 +43,6 @@ public class DiagnosisFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_diagnosis, container, false);
         deviceName = (TextView) view.findViewById(R.id.device_name);
@@ -79,26 +80,64 @@ public class DiagnosisFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start_detect:
-//                isRunning = true;
+                if (delegate != null) {
+                    delegate.startDetect();
+                }
                 break;
 
             case R.id.pre_station:
+                if (delegate != null){
+                    delegate.preStation();
+                }
                 break;
 
             case R.id.next_station:
+                if (delegate != null){
+                    delegate.nextStation();
+                }
                 break;
 
             case R.id.station_record:
+                if (delegate != null){
+                    delegate.stationRecord();
+                }
                 break;
 
             case R.id.remove_record:
+                if (delegate != null){
+                    delegate.removeRecord();
+                }
                 break;
 
             case R.id.scanQR:
+                if (delegate != null){
+                    delegate.scanQR();
+                }
                 break;
 
             case R.id.scanRFID:
+                if (delegate != null){
+                    delegate.scanRFID();
+                }
                 break;
         }
+    }
+
+    public void setDelegate(DiagnosisDelegate delegate) {
+        this.delegate = delegate;
+    }
+
+    public DiagnosisDelegate getDelegate() {
+        return delegate;
+    }
+
+    public interface DiagnosisDelegate{
+        public void startDetect();
+        public void preStation();
+        public void nextStation();
+        public void stationRecord();
+        public void removeRecord();
+        public void scanQR();
+        public void scanRFID();
     }
 }

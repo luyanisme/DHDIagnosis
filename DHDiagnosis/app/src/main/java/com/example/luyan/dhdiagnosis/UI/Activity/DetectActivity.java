@@ -55,7 +55,7 @@ public class DetectActivity extends BaseActivity implements NaviFragment.AmendNa
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState == null) {
-            super.initNavi(R.id.detect_container,"路径列表");
+            super.initNavi(R.id.detect_container,"路径列表",null);
         }
         setContentView(R.layout.activity_detect);
 

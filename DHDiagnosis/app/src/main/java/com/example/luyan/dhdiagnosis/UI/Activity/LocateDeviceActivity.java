@@ -28,7 +28,7 @@ public class LocateDeviceActivity extends BaseActivity implements NaviFragment.A
         naviTitle = getIntent().getStringExtra(IntentUtils.INTENT_STRING_PARAM);
 
         if (savedInstanceState == null){
-            super.initNavi(R.id.locate_device_container,naviTitle);
+            super.initNavi(R.id.locate_device_container,naviTitle,null);
         }
 
         findViewById(R.id.scanQR).setOnClickListener(this);

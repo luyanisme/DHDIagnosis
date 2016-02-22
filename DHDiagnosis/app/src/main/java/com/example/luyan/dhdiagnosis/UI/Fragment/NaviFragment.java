@@ -19,6 +19,7 @@ public class NaviFragment extends Fragment implements View.OnClickListener {
     private Button    rigthButton;
     private TextView  naviTitle;
     private String    naviTitleStr;
+    private String    naviRightTitle;
 
     public AmendNaviDelegate delegate;
 
@@ -34,6 +35,11 @@ public class NaviFragment extends Fragment implements View.OnClickListener {
 
         leftButton.setOnClickListener(this);
         rigthButton.setOnClickListener(this);
+
+        if (naviRightTitle != null) {
+            rigthButton.setText(naviRightTitle);
+            rigthButton.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
@@ -52,6 +58,14 @@ public class NaviFragment extends Fragment implements View.OnClickListener {
 
     public String getNaviTitleStr() {
         return naviTitleStr;
+    }
+
+    public void setNaviRightTitle(String naviRightTitle) {
+        this.naviRightTitle = naviRightTitle;
+    }
+
+    public String getNaviRightTitle() {
+        return naviRightTitle;
     }
 
     @Override
