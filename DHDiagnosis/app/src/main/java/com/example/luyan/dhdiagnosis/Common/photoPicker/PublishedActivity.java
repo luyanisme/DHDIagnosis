@@ -1,11 +1,13 @@
-package com.example.luyan.dhdiagnosis.UI.Activity;
+package com.example.luyan.dhdiagnosis.Common.photoPicker;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,7 +15,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,40 +24,34 @@ import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.example.luyan.dhdiagnosis.Common.photoPicker.Bimp;
-import com.example.luyan.dhdiagnosis.Common.photoPicker.FileUtils;
-import com.example.luyan.dhdiagnosis.Common.photoPicker.PhotoActivity;
-import com.example.luyan.dhdiagnosis.Common.photoPicker.PublishedActivity;
-import com.example.luyan.dhdiagnosis.Common.photoPicker.TestPicActivity;
 import com.example.luyan.dhdiagnosis.R;
 
-public class StationRecordActivity extends BaseActivity {
+/**
+ * Created by luyan on 2/23/16.
+ */
+public class PublishedActivity extends Activity {
 
     private GridView noScrollgridview;
     private GridAdapter adapter;
-    private EditText editTitleText;
+    private TextView activity_selectimg_send;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_station_record);
-
-        if (savedInstanceState == null){
-            super.initNavi(R.id.station_record_container,"测点记录","提交");
-        }
-
+        setContentView(R.layout.activity_selectimg);
         Init();
     }
 
@@ -66,38 +61,37 @@ public class StationRecordActivity extends BaseActivity {
         adapter = new GridAdapter(this);
         adapter.update();
         noScrollgridview.setAdapter(adapter);
-        noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        noScrollgridview.setOnItemClickListener(new OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
                 if (arg2 == Bimp.bmp.size()) {
-                    new PopupWindows(StationRecordActivity.this, noScrollgridview);
+                    new PopupWindows(PublishedActivity.this, noScrollgridview);
                 } else {
-                    Intent intent = new Intent(StationRecordActivity.this,
+                    Intent intent = new Intent(PublishedActivity.this,
                             PhotoActivity.class);
                     intent.putExtra("ID", arg2);
                     startActivity(intent);
                 }
             }
         });
+        activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
+        activity_selectimg_send.setOnClickListener(new OnClickListener() {
 
-    }
-
-    @Override
-    public void rightNavi() {
-        super.rightNavi();
-
-        List<String> list = new ArrayList<String>();
-        for (int i = 0; i < Bimp.drr.size(); i++) {
-            String Str = Bimp.drr.get(i).substring(
-                    Bimp.drr.get(i).lastIndexOf("/") + 1,
-                    Bimp.drr.get(i).lastIndexOf("."));
-            list.add(FileUtils.SDPATH+Str+".JPEG");
-        }
-        // 高清的压缩图片全部就在  list 路径里面了
-        // 高清的压缩过的 bmp 对象  都在 Bimp.bmp里面
-        // 完成上传服务器后 .........
-        FileUtils.deleteDir();
+            public void onClick(View v) {
+                List<String> list = new ArrayList<String>();
+                for (int i = 0; i < Bimp.drr.size(); i++) {
+                    String Str = Bimp.drr.get(i).substring(
+                            Bimp.drr.get(i).lastIndexOf("/") + 1,
+                            Bimp.drr.get(i).lastIndexOf("."));
+                    list.add(FileUtils.SDPATH+Str+".JPEG");
+                }
+                // 高清的压缩图片全部就在  list 路径里面了
+                // 高清的压缩过的 bmp 对象  都在 Bimp.bmp里面
+                // 完成上传服务器后 .........
+                FileUtils.deleteDir();
+            }
+        });
     }
 
     @SuppressLint("HandlerLeak")
@@ -252,8 +246,8 @@ public class StationRecordActivity extends BaseActivity {
             ll_popup.startAnimation(AnimationUtils.loadAnimation(mContext,
                     R.anim.push_bottom_in_2));
 
-            setWidth(ViewGroup.LayoutParams.FILL_PARENT);
-            setHeight(ViewGroup.LayoutParams.FILL_PARENT);
+            setWidth(LayoutParams.FILL_PARENT);
+            setHeight(LayoutParams.FILL_PARENT);
             setBackgroundDrawable(new BitmapDrawable());
             setFocusable(true);
             setOutsideTouchable(true);
@@ -267,21 +261,21 @@ public class StationRecordActivity extends BaseActivity {
                     .findViewById(R.id.item_popupwindows_Photo);
             Button bt3 = (Button) view
                     .findViewById(R.id.item_popupwindows_cancel);
-            bt1.setOnClickListener(new View.OnClickListener() {
+            bt1.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
                     photo();
                     dismiss();
                 }
             });
-            bt2.setOnClickListener(new View.OnClickListener() {
+            bt2.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
-                    Intent intent = new Intent(StationRecordActivity.this,
+                    Intent intent = new Intent(PublishedActivity.this,
                             TestPicActivity.class);
                     startActivity(intent);
                     dismiss();
                 }
             });
-            bt3.setOnClickListener(new View.OnClickListener() {
+            bt3.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
                     dismiss();
                 }
@@ -335,4 +329,5 @@ public class StationRecordActivity extends BaseActivity {
                 break;
         }
     }
+
 }
