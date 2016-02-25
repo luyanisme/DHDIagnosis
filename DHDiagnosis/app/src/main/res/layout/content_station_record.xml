@@ -46,7 +46,7 @@
         <GridView
             android:id="@+id/noScrollgridview"
             android:layout_width="290dp"
-            android:layout_height="350dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:horizontalSpacing="3dp"
             android:numColumns="4"
@@ -64,6 +64,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="添加视频:"/>
+
+        <ImageView
+            android:id="@+id/add_video"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/icon_addpic_unfocused"/>
 
     </LinearLayout>
 </RelativeLayout>

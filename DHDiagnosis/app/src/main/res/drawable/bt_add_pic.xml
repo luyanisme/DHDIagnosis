@@ -5,7 +5,7 @@
 		>
 		<item
 				android:state_pressed="true"
-			android:drawable="@mipmap/icon_addpic_focused" />
+				android:drawable="@mipmap/icon_addpic_focused" />
 		<item
 				android:drawable="@mipmap/icon_addpic_unfocused" />
 </selector>

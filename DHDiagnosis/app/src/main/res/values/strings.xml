@@ -10,4 +10,6 @@
     <string name="title_activity_device_list">DeviceListActivity</string>
     <string name="title_activity_diagnosis">DiagnosisActivity</string>
     <string name="title_activity_station_record">StationRecordActivity</string>
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="title_activity_video_player">VideoPlayerActivity</string>
 </resources>

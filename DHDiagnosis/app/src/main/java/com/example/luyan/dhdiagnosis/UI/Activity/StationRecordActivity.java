@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -33,31 +34,59 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.example.luyan.dhdiagnosis.Common.photoPicker.Bimp;
-import com.example.luyan.dhdiagnosis.Common.photoPicker.FileUtils;
 import com.example.luyan.dhdiagnosis.Common.photoPicker.PhotoActivity;
-import com.example.luyan.dhdiagnosis.Common.photoPicker.PublishedActivity;
 import com.example.luyan.dhdiagnosis.Common.photoPicker.TestPicActivity;
 import com.example.luyan.dhdiagnosis.R;
+import com.example.luyan.dhdiagnosis.utils.FileUtils;
+import com.example.luyan.dhdiagnosis.utils.IntentUtils;
+import com.example.luyan.dhdiagnosis.utils.VideoUtils;
 
 public class StationRecordActivity extends BaseActivity {
 
     private GridView noScrollgridview;
     private GridAdapter adapter;
+    private ImageView addVideo;
     private EditText editTitleText;
+    private File videoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_record);
 
-        if (savedInstanceState == null){
-            super.initNavi(R.id.station_record_container,"测点记录","提交");
+        videoFile = new File(FileUtils.STATION_VIDEO_PATH);
+
+        /*添加视频*/
+        addVideo = (ImageView) findViewById(R.id.add_video);
+        addVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (videoFile.exists()) {
+                    IntentUtils.startToActivity(StationRecordActivity.this, VideoPlayerActivity.class);
+                } else {
+                    IntentUtils.startToActivity(StationRecordActivity.this, VideoActivity.class);
+                }
+            }
+        });
+
+        if (savedInstanceState == null) {
+            super.initNavi(R.id.station_record_container, "测点记录", "提交");
         }
 
+        /*添加照片*/
         Init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (videoFile.exists()) {
+            addVideo.setImageBitmap(VideoUtils.getVideoThumbnail(FileUtils.STATION_VIDEO_PATH));
+        } else {
+            addVideo.setImageResource(R.mipmap.icon_addpic_unfocused);
+        }
     }
 
     public void Init() {
@@ -92,7 +121,7 @@ public class StationRecordActivity extends BaseActivity {
             String Str = Bimp.drr.get(i).substring(
                     Bimp.drr.get(i).lastIndexOf("/") + 1,
                     Bimp.drr.get(i).lastIndexOf("."));
-            list.add(FileUtils.SDPATH+Str+".JPEG");
+            list.add(FileUtils.SDPATH + Str + ".JPEG");
         }
         // 高清的压缩图片全部就在  list 路径里面了
         // 高清的压缩过的 bmp 对象  都在 Bimp.bmp里面
