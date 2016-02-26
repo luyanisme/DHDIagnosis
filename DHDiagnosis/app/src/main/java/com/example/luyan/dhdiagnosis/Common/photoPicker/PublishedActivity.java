@@ -39,6 +39,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.luyan.dhdiagnosis.R;
+import com.example.luyan.dhdiagnosis.utils.FileUtils;
 
 /**
  * Created by luyan on 2/23/16.

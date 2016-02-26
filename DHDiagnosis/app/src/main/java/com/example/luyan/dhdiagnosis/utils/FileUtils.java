@@ -16,7 +16,15 @@ import java.io.IOException;
 public class FileUtils {
 
     public static String SDPATH = Environment.getExternalStorageDirectory() + "/formats/";
-    final public static String STATION_VIDEO_PATH = Environment.getExternalStorageDirectory() + File.separator + "im/video/"+"测点记录.mp4";
+    final public static String STATION_VIDEO_PATH = Environment.getExternalStorageDirectory() + File.separator + "DH/video/"+"测点记录.mp4";
+    final public static String STATION_AUDIO_PATH = Environment.getExternalStorageDirectory() + File.separator + "DH/audio/"+"测点记录.mp3";
+
+    public static void appFileDir(String pathName){
+        File appDir = new File(Environment.getExternalStorageDirectory() + File.separator + "DH/" + pathName + "/");
+        if (!appDir.exists()) {
+            appDir.mkdirs();
+        }
+    }
 
     public static void saveBitmap(Bitmap bm, String picName) {
         Log.e("", "保存图片");

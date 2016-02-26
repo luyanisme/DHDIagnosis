@@ -12,4 +12,5 @@
     <string name="title_activity_station_record">StationRecordActivity</string>
     <string name="title_activity_video">VideoActivity</string>
     <string name="title_activity_video_player">VideoPlayerActivity</string>
+    <string name="title_activity_audio">AudioActivity</string>
 </resources>

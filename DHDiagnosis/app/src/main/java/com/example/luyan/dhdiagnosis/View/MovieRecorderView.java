@@ -46,7 +46,6 @@ public class MovieRecorderView extends LinearLayout implements OnErrorListener {
     private boolean isOpenCamera;// 是否一开始就打开摄像头
     private int mRecordMaxTime;// 一次拍摄最长时间
     private int mTimeCount;// 时间计数
-    private File mVecordFile = null;// 文件
 
     public MovieRecorderView(Context context) {
         this(context, null);
@@ -166,22 +165,6 @@ public class MovieRecorderView extends LinearLayout implements OnErrorListener {
         }
     }
 
-    private void createRecordDir() {
-        /*制作视频路径*/
-        File sampleDir = new File(Environment.getExternalStorageDirectory() + File.separator + "im/video/");
-        if (!sampleDir.exists()) {
-            sampleDir.mkdirs();
-        }
-
-        File vecordDir = sampleDir;
-        // 创建文件
-        try {
-            mVecordFile = File.createTempFile("recording", ".mp4", vecordDir);//mp4格式
-        } catch (IOException e) {
-
-        }
-    }
-
     /**
      * 初始化
      *
@@ -230,6 +213,7 @@ public class MovieRecorderView extends LinearLayout implements OnErrorListener {
      */
     public void record(final OnRecordFinishListener onRecordFinishListener) {
         this.mOnRecordFinishListener = onRecordFinishListener;
+        FileUtils.appFileDir("video");
         try {
             if (!isOpenCamera)// 如果未打开摄像头，则打开
                 initCamera();

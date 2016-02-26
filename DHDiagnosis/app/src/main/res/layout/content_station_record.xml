@@ -72,5 +72,24 @@
             android:layout_marginTop="10dp"
             android:background="@mipmap/icon_addpic_unfocused"/>
 
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#a4a4a4"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="添加录音:"/>
+
+        <ImageView
+            android:id="@+id/add_audio"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/icon_addpic_unfocused"/>
+
     </LinearLayout>
 </RelativeLayout>

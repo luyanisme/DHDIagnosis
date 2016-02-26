@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.luyan.dhdiagnosis.R;
+import com.example.luyan.dhdiagnosis.utils.FileUtils;
 
 public class PhotoActivity extends Activity {
 

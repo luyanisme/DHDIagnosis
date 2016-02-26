@@ -73,6 +73,10 @@
         <activity
             android:name=".UI.Activity.VideoPlayerActivity"
             android:label="@string/title_activity_video_player"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UI.Activity.AudioActivity"
+            android:label="@string/title_activity_audio"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

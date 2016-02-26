@@ -48,6 +48,7 @@ public class StationRecordActivity extends BaseActivity {
     private GridView noScrollgridview;
     private GridAdapter adapter;
     private ImageView addVideo;
+    private ImageView addAudio;
     private EditText editTitleText;
     private File videoFile;
 
@@ -56,27 +57,18 @@ public class StationRecordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_record);
 
-        videoFile = new File(FileUtils.STATION_VIDEO_PATH);
-
-        /*添加视频*/
-        addVideo = (ImageView) findViewById(R.id.add_video);
-        addVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (videoFile.exists()) {
-                    IntentUtils.startToActivity(StationRecordActivity.this, VideoPlayerActivity.class);
-                } else {
-                    IntentUtils.startToActivity(StationRecordActivity.this, VideoActivity.class);
-                }
-            }
-        });
-
         if (savedInstanceState == null) {
             super.initNavi(R.id.station_record_container, "测点记录", "提交");
         }
 
+        /*添加视频*/
+        InitVideo();
+
         /*添加照片*/
-        Init();
+        InitPhoto();
+
+        /*添加录音*/
+        InitAudio();
     }
 
     @Override
@@ -87,9 +79,15 @@ public class StationRecordActivity extends BaseActivity {
         } else {
             addVideo.setImageResource(R.mipmap.icon_addpic_unfocused);
         }
+
+        if (FileUtils.fileIsExists(FileUtils.STATION_AUDIO_PATH)){
+            addAudio.setImageResource(R.mipmap.music_tag);
+        } else {
+            addAudio.setImageResource(R.mipmap.icon_addpic_unfocused);
+        }
     }
 
-    public void Init() {
+    public void InitPhoto() {
         noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridAdapter(this);
@@ -110,6 +108,34 @@ public class StationRecordActivity extends BaseActivity {
             }
         });
 
+    }
+
+    public void InitVideo() {
+
+        /*获取文件的路径*/
+        videoFile = new File(FileUtils.STATION_VIDEO_PATH);
+
+        addVideo = (ImageView) findViewById(R.id.add_video);
+        addVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (videoFile.exists()) {
+                    IntentUtils.startToActivity(StationRecordActivity.this, VideoPlayerActivity.class);
+                } else {
+                    IntentUtils.startToActivity(StationRecordActivity.this, VideoActivity.class);
+                }
+            }
+        });
+    }
+
+    public void InitAudio() {
+        addAudio = (ImageView) findViewById(R.id.add_audio);
+        addAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentUtils.startToActivity(StationRecordActivity.this, AudioActivity.class);
+            }
+        });
     }
 
     @Override
