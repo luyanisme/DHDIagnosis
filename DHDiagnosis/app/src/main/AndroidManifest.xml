@@ -77,6 +77,10 @@
         <activity
             android:name=".UI.Activity.AudioActivity"
             android:label="@string/title_activity_audio"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UI.Activity.ScanQRActivity"
+            android:label="@string/title_activity_scan_qr"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

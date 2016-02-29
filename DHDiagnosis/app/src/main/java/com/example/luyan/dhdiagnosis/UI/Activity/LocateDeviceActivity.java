@@ -27,8 +27,8 @@ public class LocateDeviceActivity extends BaseActivity implements NaviFragment.A
 
         naviTitle = getIntent().getStringExtra(IntentUtils.INTENT_STRING_PARAM);
 
-        if (savedInstanceState == null){
-            super.initNavi(R.id.locate_device_container,naviTitle,null);
+        if (savedInstanceState == null) {
+            super.initNavi(R.id.locate_device_container, naviTitle, null);
         }
 
         findViewById(R.id.scanQR).setOnClickListener(this);
@@ -40,17 +40,18 @@ public class LocateDeviceActivity extends BaseActivity implements NaviFragment.A
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.scanQR:
-
-            break;
+                IntentUtils.startToActivity(LocateDeviceActivity.this, ScanQRActivity.class);
+                overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
+                break;
 
             case R.id.scanRFID:
 
                 break;
 
             case R.id.choose_in_path:
-                IntentUtils.startToActivityWithString(LocateDeviceActivity.this, DeviceListActivity.class,naviTitle);
+                IntentUtils.startToActivityWithString(LocateDeviceActivity.this, DeviceListActivity.class, naviTitle);
                 break;
 
             case R.id.default_detect:
@@ -59,7 +60,7 @@ public class LocateDeviceActivity extends BaseActivity implements NaviFragment.A
         }
 
         /*动画效果*/
-        overridePendingTransition(R.anim.move_right_in_activity,R.anim.move_left_out_activity);
+        overridePendingTransition(R.anim.move_right_in_activity, R.anim.move_left_out_activity);
     }
 
 }
