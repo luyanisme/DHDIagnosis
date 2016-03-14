@@ -48,7 +48,6 @@ public class DetectActivity extends BaseActivity implements NaviFragment.AmendNa
             "xxxx车间工艺路径巡检13",
             "xxxx车间工艺路径巡检14",
             "xxxx车间工艺路径巡检15",};
-    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

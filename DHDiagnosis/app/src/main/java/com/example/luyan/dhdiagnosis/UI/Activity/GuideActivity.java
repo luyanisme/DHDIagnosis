@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.luyan.dhdiagnosis.R;
+import com.example.luyan.dhdiagnosis.UI.Activity.TempTask.TempTaskActivity;
 import com.example.luyan.dhdiagnosis.utils.IntentUtils;
 
 public class GuideActivity extends AppCompatActivity implements View.OnClickListener {
@@ -18,6 +19,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.detect_model).setOnClickListener(this);
         findViewById(R.id.temp_task).setOnClickListener(this);
         findViewById(R.id.fault_diagnosis).setOnClickListener(this);
+        findViewById(R.id.sensor_info).setOnClickListener(this);
 
     }
 
@@ -31,11 +33,16 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
 
             /*跳转至临时任务*/
             case R.id.temp_task:
-
+                IntentUtils.startToActivity(GuideActivity.this,TempTaskActivity.class);
                 break;
 
             /*跳转至精密故障诊断*/
             case R.id.fault_diagnosis:
+                break;
+
+             /*传感器信息*/
+            case R.id.sensor_info:
+                IntentUtils.startToActivity(GuideActivity.this,SensorInfoActivity.class);
                 break;
         }
 

@@ -9,5 +9,5 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/work_space_name"
         android:layout_marginLeft="10dp"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center"/>
 </LinearLayout>

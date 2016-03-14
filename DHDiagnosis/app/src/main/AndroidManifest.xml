@@ -81,7 +81,16 @@
         <activity
             android:name=".UI.Activity.ScanQRActivity"
             android:label="@string/title_activity_scan_qr"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UI.Activity.SensorInfoActivity"
+            android:label="@string/title_activity_sensor_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UI.Activity.TempTask.TempTaskActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UI.Activity.TempTask.NewTempTaskActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
